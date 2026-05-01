@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Passwords</title>
+    <!-- Add this link to import Bootstrap if you added it earlier -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+    <h2>All Passwords</h2>
+    
+    <!-- THIS IS THE MISSING LINK -->
+    <a href="{% url 'vault:add_password' %}" class="btn btn-success mb-3">+ Add New Password</a>
+    
+    <a href="{% url 'vault:logout' %}" class="btn btn-danger mb-3">Logout</a>
+    
+    <hr>
+    <ul class="list-group">
+        {% for entry in passwords %}
+            <li class="list-group-item d-flex justify-content-between">
+                {{ entry.service_name }} - {{ entry.username }}
+                <a href="{% url 'vault:reveal_password' entry_id=entry.id %}">Reveal</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No passwords saved yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
