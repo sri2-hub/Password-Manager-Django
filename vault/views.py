@@ -6,6 +6,7 @@ from .models import PasswordEntry
 from .forms import PasswordEntryForm
 from .crypto import encrypt_password, decrypt_password
 
+
 def home(request):
     return render(request, 'home.html') 
 

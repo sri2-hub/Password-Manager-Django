@@ -1,14 +1,63 @@
 <!DOCTYPE html>
-<html>
-    <head>
-    <title>My Password Manager</title>
-    <!-- Bootstrap 5 CSS -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Credential Readout | {{ entry.service_name }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0f0f12;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', monospace;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .reveal-card {
+            background: #1a1a20;
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+        .password-display {
+            background: #000;
+            color: #00ff41; /* Classic terminal green */
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            border: 1px solid #004400;
+        }
+        .btn-back {
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+        }
+    </style>
 </head>
 <body>
-    <h2>{{ entry.service_name }}</h2>
-    <p>Username: {{ entry.username }}</p>
-    <p>Password: <strong>{{ password }}</strong></p>
-    <a href="{% url 'vault:password_list' %}">Back to List</a>
+
+    <div class="container d-flex justify-content-center">
+        <div class="reveal-card shadow-lg col-md-6 text-center">
+            <h2 class="text-white mb-4">{{ entry.service_name }}</h2>
+            
+            <div class="mb-4">
+                <span class="text-secondary">Account Username:</span>
+                <p class="h5 text-white">{{ entry.username }}</p>
+            </div>
+
+            <div class="mb-4">
+                <span class="text-secondary">Decrypted Secret:</span>
+                <div class="password-display mt-2 shadow-sm">
+                    {{ password }}
+                </div>
+            </div>
+
+            <a href="{% url 'vault:password_list' %}" class="btn btn-outline-secondary btn-back">
+                Return to Protocol
+            </a>
+        </div>
+    </div>
+
 </body>
 </html>
